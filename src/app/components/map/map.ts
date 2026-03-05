@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Map, NavigationControl } from 'maplibre-gl';
+import maplibregl, { Map, Marker, NavigationControl, Popup } from 'maplibre-gl';
 import MinimapControl from "maplibregl-minimap";
 import { GotGeoService } from '../../../services/GotGeo.service';
 import { GotFeature, GotGeometry, } from '../../../interfaces/got.interface';
@@ -24,7 +24,8 @@ export class Maps implements OnInit {
 
   ngOnInit(): void {
 
-  this.getMap()
+    this.getMap()
+    this.getAllMarkers()
   }
 
   getMap() {
@@ -63,22 +64,59 @@ export class Maps implements OnInit {
   }
 
 
+  getAllMarkers() {
+
+    this.geoService.getLocalization().subscribe((data: any) => {
+
+      data.features.map((item: any) => {
+
+
+  let text = `<div class="w-64 z-0 space-y-4 font-sans bg-stone-100 rounded-lg">
+    <p class="text-xs uppercase tracking-widest text-stone-400">
+      Localización
+    </p>
+
+
+    <h2 class="text-lg font-semibold text-black leading-tight">
+      ${item.properties.real_place}
+    </h2>
+
+
+    <div class="overflow-hidden rounded-lg border border-white/10">
+      <img
+        src="${item.properties.place_image}"
+        class="w-full h-36  object-cover"
+        alt="${item.properties.real_place}"
+      >
+    </div>
+
+  </div>
+        `
+
+
+        const popup = new maplibregl.Popup({ offset: 25, maxWidth: "300px" }).setHTML(text
+
+        );
+
+        const el = document.createElement('div');
+        el.id = 'marker';
+
+
+        let setLng = item.geometry.coordinates
+        let marker = new Marker({
+          color: "#ff0000",
+        }).setLngLat(setLng)
+          .setPopup(popup)
+          .addTo(this.map)
+
+      })
+    })
+
+  }
+
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
