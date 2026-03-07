@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import maplibregl, { Map, Marker, NavigationControl, Popup } from 'maplibre-gl';
 import MinimapControl from "maplibregl-minimap";
 import { GotGeoService } from '../../../services/GotGeo.service';
-import { GotFeature, GotGeometry, } from '../../../interfaces/got.interface';
+import { GotFeature, GotGeometry, GotProperties, } from '../../../interfaces/got.interface';
 import { CommonModule } from '@angular/common';
 import { FeatureCollection } from 'geojson';
 
@@ -21,6 +21,8 @@ export class Maps implements OnInit {
   map!: Map;
 
   private markers: GotFeature[] = []
+  public mapStateUpdate = inject(GotGeoService)
+  public mapState = inject(GotGeoService);
 
   ngOnInit(): void {
 
@@ -66,12 +68,18 @@ export class Maps implements OnInit {
 
   getAllMarkers() {
 
+    let p: GotProperties;
+
     this.geoService.getLocalization().subscribe((data: any) => {
 
       data.features.map((item: any) => {
 
+        p = item.properties
 
-  let text = `<div class="w-64 z-0 space-y-4 font-sans bg-stone-100 rounded-lg">
+        // console.log(item.properties)
+
+
+        let text = `<div class="w-64 z-0 space-y-4 font-sans bg-stone-100 rounded-lg">
     <p class="text-xs uppercase tracking-widest text-stone-400">
       Localización
     </p>
@@ -109,8 +117,17 @@ export class Maps implements OnInit {
           .setPopup(popup)
           .addTo(this.map)
 
+
+        this.map.on('click', () => {
+
+          
+        })
+
       })
+
+
     })
+
 
   }
 

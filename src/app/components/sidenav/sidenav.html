@@ -1,8 +1,8 @@
 
 <!-- drawer init and toggle -->
-<div class="text-center absolute top-28 left-2">
+<div class="text-center absolute top-20 left-2">
    <button
-
+(click)="toggle()"
 
    class="rounded-lg inline-flex items-center justify-center text-white bg-mauve-950 box-border border border-transparent hover:bg-amber-300 focus:ring-4 focus:ring-amber-200 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none" type="button" data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
     <svg width="26" height="27" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +25,11 @@
     transition-transform duration-300 ease-out
     bg-mauve-900 bg-no-repeat bg-cover bg-blend-overlay
     text-white " tabindex="-1" aria-labelledby="drawer-right-label"
+ [ngClass]="{
 
+    'translate-x-0': opened,
+    'translate-x-full': !opened
+  }"
 
   >
    <div class="flex items-center justify-between pb-4 mb-6 border-b border-white/10">
@@ -34,7 +38,7 @@
         Localizaciones
       </h5>
       <button
-
+(click)="clear()"
 
       type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example" class="text-white bg-danger-strong hover:text-heading hover:bg-neutral-tertiary rounded-base w-9 h-9 absolute top-2.5 end-2.5 flex items-center justify-center">
          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/></svg>
@@ -45,13 +49,13 @@
    <div class="mb-8">
  <p class="mb-2 text-sm text-stone-400 uppercase tracking-wide ">Estás muy cerca<a href="#" class="font-medium  underline hover:no-underline"></a> de estos escenarios</p>
 
-   <p class="text-2xl text-white font-bold"></p>
+   <p class="text-2xl text-white font-bold">{{ localization()?.real_place }}</p>
    </div>
 
 
 <div class="mb-8 rounded-lg overflow-hidden">
   <img
-    [src]=""
+    [src]="localization()?.place_image"
     class="w-full h-48 object-cover"
   >
 </div>
@@ -60,33 +64,33 @@
    <div class="mb-8 text-center">
 <div class="mb-5 mt-5 text-md text-stone-400 font-bold">
 
-  <p class="text-xs uppercase tracking-widest text-stone-200 mb-2"></p>Escene:
-    <p class="mt-4 text-lg italic text-white">""
+  <p class="text-xs uppercase tracking-widest text-stone-200 mb-2">{{localization()?.scene}}</p>Escene:
+    <p class="mt-4 text-lg italic text-white">"{{localization()?.series}}"
 </div>
 
  <p class="mb-4 text-sm uppercase tracking-wide text-stone-400">Personajes</p>
 
 <div class="space-y-4">
-
+   @for( item of localization()?.actors; track item;){
 
  <div class="flex justify-center items-center-safe gap-4">
       <img
         class="w-12 h-12 rounded-full object-cover border border-white/20"
-        [src]=""
+        [src]="item.image"
       >
 
       <div>
         <p class="text-sm font-medium text-white">
-
+          {{ item.name }}
         </p>
         <p class="text-xs text-stone-400">
-
+          {{ item.nameActor }}
         </p>
       </div>
     </div>
 
 
-
+   }
 
 
 </div>
