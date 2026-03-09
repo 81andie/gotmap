@@ -580,7 +580,7 @@
       "properties": {
         "id": "c.Bisbe Josep Cartañà",
         "series": "Game of Thrones",
-        "scene": "Bravos/teatro/mercado",
+        "scene": "Braavos/teatro/mercado",
         "real_place": "Zona Catedral",
         "country": "Girona",
         "actors": [
@@ -611,7 +611,7 @@
       "properties": {
         "id": "Plaça del Jurats",
         "series": "Game of Thrones",
-        "scene": "Bravos/teatro/mercado",
+        "scene": "Braavos/teatro/mercado",
         "real_place": "Plaça dels Jurats",
         "country": "Girona",
         "actors": [

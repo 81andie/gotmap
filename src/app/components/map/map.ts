@@ -25,7 +25,7 @@ export class Maps implements OnInit {
       if (!selected.length || !this.map) return
       const bounds = new maplibregl.LngLatBounds()
 
-       selected.forEach(p => bounds.extend([p.longitude, p.latitude]));
+      selected.forEach(p => bounds.extend([p.longitude, p.latitude]));
       //console.log(latlngs)
       this.map.fitBounds(bounds, {
         padding: 50, // margen alrededor de los markers
@@ -48,6 +48,7 @@ export class Maps implements OnInit {
 
     this.getMap()
     this.getAllMarkers()
+    this.getNereastPoint()
   }
 
   getMap() {
@@ -139,24 +140,33 @@ export class Maps implements OnInit {
           this.mapStateUpdate.setSearchLocation([{ ...p, latitude: item.geometry.coordinates[1], longitude: item.geometry.coordinates[0] }])
 
         })
-
-
       })
+    })
+  }
 
+
+  getNereastPoint() {
+
+    this.geoService.getLocalization().subscribe((data: any) => {
+
+      data.features.forEach((item: GotFeature) => {
+
+     
+      })
 
 
     })
 
   }
 
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
 
 
 

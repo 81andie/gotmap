@@ -32,7 +32,8 @@ this.getAllMarkers()
 
     let filteredFeatures = this.allMarkers.filter(item =>
       item.properties.real_place.toLowerCase().includes(input) ||
-      item.properties.country.toLowerCase() === input
+      item.properties.country.toLowerCase() === input ||
+      item.properties.scene.toLowerCase()=== input
     );
 
     console.log(filteredFeatures)
