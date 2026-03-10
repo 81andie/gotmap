@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build --base-href /gotmap/",
     "watch": "ng build --watch --configuration development",
+    "deploy": "angular-cli-ghpages --dir=docs",
     "test": "ng test"
   },
   "private": true,
