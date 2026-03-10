@@ -144,16 +144,21 @@ export class Maps implements OnInit {
     })
   }
 
-
   getNereastPoint() {
 
     this.geoService.getLocalization().subscribe((data: any) => {
 
-      data.features.forEach((item: GotFeature) => {
+      this.map.on('click', (e) => {
 
-     
+       // console.log(e.lngLat)
+
+        let text = `estas aquí`;
+
+        new maplibregl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(text)
+                .addTo(this.map);
       })
-
 
     })
 
