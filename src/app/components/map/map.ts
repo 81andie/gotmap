@@ -146,21 +146,56 @@ export class Maps implements OnInit {
 
   getNereastPoint() {
 
-    this.geoService.getLocalization().subscribe((data: any) => {
 
-      this.map.on('click', (e) => {
+    this.map.on('click', (e) => {
 
-       // console.log(e.lngLat)
+      // console.log(e.lngLat)
 
-        let text = `estas aquí`;
+      let text = `estas aquí`;
 
-        new maplibregl.Popup()
-                .setLngLat(e.lngLat)
-                .setHTML(text)
-                .addTo(this.map);
+      new maplibregl.Popup()
+        .setLngLat(e.lngLat)
+        .setHTML(text)
+        .addTo(this.map);
+
+
+      const coordinatesArr = this.mapStateUpdate.searchLocalition();
+
+      if (!coordinatesArr.length) return;
+
+      let puntoA = e.lngLat;
+      let distanciaMinima = Infinity;
+      let puntoMasCercano: maplibregl.LngLat | null = null
+
+      coordinatesArr.forEach((p) => {
+        let puntoB = new maplibregl.LngLat(p.longitude, p.latitude)
+        var distance = puntoA.distanceTo(puntoB)
+
+
+        if (distance < distanciaMinima) {
+          distanciaMinima = distance
+          puntoMasCercano = puntoB
+        }
+
+        if (!puntoMasCercano) return;
+
+
+        this.map.flyTo({
+          center: puntoMasCercano,
+          zoom: 18,
+          speed: 2.5,
+          curve: 1.5,
+          easing(t) {
+            return t;
+          },
+
+          essential: true // this animation is considered essential with respect to prefers-reduced-motion
+        });
+
       })
 
     })
+
 
   }
 
