@@ -57,7 +57,7 @@ export class Maps implements OnInit {
 
     this.map = new Map({
       container: 'map',
-      style: 'https://api.maptiler.com/maps/backdrop-v4/style.json?key=bZ943IENWwexU3umotpo', // stylesheet location
+      style: 'https://api.maptiler.com/maps/backdrop-v4/style.json?key=6sLC1CEfGPuxGLdTE3sO', // stylesheet location
       center: [-3.5, 40], // starting position [lng, lat]
       zoom: 3 // starting zoom,
 
