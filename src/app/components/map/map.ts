@@ -65,7 +65,7 @@ export class Maps implements OnInit {
 
     const miniMap = new Map({
       container: 'minimap',
-      style: 'https://api.maptiler.com/maps/backdrop-v4/style.json?key=bZ943IENWwexU3umotpo',
+      style: 'https://api.maptiler.com/maps/backdrop-v4/style.json?key=6sLC1CEfGPuxGLdTE3sO',
       center: [-74.5, 40],
       zoom: 4,
       attributionControl: false
